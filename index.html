@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MZ — A Little Cake. A Big Experience.</title>
+<meta name="description" content="Discover MZ cake in a can, layer by delicious layer.">
+<style>
+:root{--ink:#211713;--cream:#f7f0e5;--paper:#fffaf2;--cocoa:#70442f;--rose:#b75c59;--gold:#c59a5b;--muted:#78695e}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:Georgia,'Times New Roman',serif}
+header{position:fixed;z-index:10;top:0;left:0;width:100%;padding:18px 6vw;display:flex;justify-content:space-between;align-items:center;background:rgba(247,240,229,.88);backdrop-filter:blur(14px);border-bottom:1px solid #dfd2c1}
+.logo{font:800 25px Arial,sans-serif;letter-spacing:.22em}.nav{font:12px Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase}.nav a{color:var(--ink);text-decoration:none;margin-left:26px}
+.hero{min-height:100vh;padding:150px 8vw 80px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:5vw;background:radial-gradient(ellipse at 80% 45%,#e9d7bf 0,transparent 48%),var(--cream)}
+.eyebrow{font:11px Arial,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:var(--cocoa)}h1{font-size:clamp(54px,8vw,112px);line-height:.9;letter-spacing:-.055em;margin:22px 0}h1 em{font-weight:400;color:var(--rose)}.hero p{max-width:440px;font-size:19px;line-height:1.6;color:var(--muted)}.cta{display:inline-block;margin-top:22px;padding:15px 24px;background:var(--ink);color:white;text-decoration:none;font:11px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;border-radius:3px}
+.hero-art{position:relative;display:flex;justify-content:center;align-items:center;min-height:520px}.hero-art:before{content:"";position:absolute;width:min(34vw,390px);height:min(34vw,390px);border-radius:50%;background:#ead7bd;box-shadow:inset 0 0 0 1px #d6c2a8}
+.hero-art img{position:relative;max-height:500px;max-width:80%;object-fit:contain;filter:drop-shadow(0 24px 20px #38231635);transform:rotate(3deg);animation:float 5s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-13px) rotate(-1deg)}}
+.intro{padding:100px 8vw;text-align:center;background:var(--paper)}.intro h2,.layers-head h2{font-size:clamp(38px,5vw,64px);letter-spacing:-.04em;margin:14px 0}.intro p{max-width:650px;margin:0 auto;color:var(--muted);font-size:18px;line-height:1.7}
+.layer-section{padding:100px 7vw 120px;background:#251a16;color:#fff8ed}.layers-head{text-align:center;margin-bottom:55px}.layers-head .eyebrow{color:#d4ad7d}.layers-head p{color:#c9b9a9;font-size:16px}
+.explorer{display:grid;grid-template-columns:.85fr 1.15fr;gap:5vw;max-width:1200px;margin:auto;align-items:start}
+.product-side{position:sticky;top:110px;min-height:660px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 20px;background:linear-gradient(145deg,#3b2921,#211713);border:1px solid #604637;border-radius:18px;overflow:hidden}
+.product-side:before{content:"";position:absolute;width:330px;height:330px;border-radius:50%;background:#6a4632;opacity:.3}
+.product-side img{position:relative;z-index:1;max-height:430px;max-width:82%;object-fit:contain;filter:drop-shadow(0 20px 20px #0008);transition:opacity .25s,transform .55s}
+.product-side img.switching{opacity:.25;transform:translateY(14px) rotate(5deg)}
+.flavour-name{position:relative;z-index:1;margin-top:22px;font-size:29px}.flavour-note{position:relative;z-index:1;color:#cbb8a6;font:11px Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;margin-top:8px}
+.flavour-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}.flavour-tabs button{border:1px solid #755846;background:transparent;color:#f8eee2;padding:11px 14px;border-radius:30px;font:11px Arial,sans-serif;letter-spacing:.08em;cursor:pointer;transition:.2s}.flavour-tabs button.active,.flavour-tabs button:hover{background:#f1dfc7;color:#281b15;border-color:#f1dfc7}
+.steps-intro{font-size:15px;color:#c9b9a9;line-height:1.6;margin:0 0 22px}
+.layer-list{display:flex;flex-direction:column;gap:14px}
+.layer-card{display:grid;grid-template-columns:76px 1fr;gap:18px;align-items:center;padding:18px;background:#34251f;border:1px solid #594034;border-radius:12px;opacity:.35;transform:translateX(22px);transition:opacity .55s,transform .55s,border-color .3s}
+.layer-card.visible{opacity:1;transform:translateX(0);border-color:#a77a52}
+.layer-number{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:#f0dfca;color:#39251b;font:700 21px Arial,sans-serif}
+.layer-card h3{font-size:22px;margin:0 0 5px}.layer-card p{font:13px/1.5 Arial,sans-serif;color:#cbb9a6;margin:0}
+.stack-visual{display:flex;align-items:center;justify-content:center;gap:5px;margin:0 auto 28px;min-height:76px}
+.stack-piece{width:46px;height:45px;border-radius:7px 7px 12px 12px;background:linear-gradient(135deg,#b97c51,#633b2b);box-shadow:inset 0 4px 0 #ffffff20,0 6px 0 #120d0b;transform:translateY(18px) scale(.8);opacity:0;transition:.5s}
+.stack-piece.on{transform:translateY(0) scale(1);opacity:1}.stack-piece.cream{background:linear-gradient(135deg,#fff0d8,#d9bfa2)}.stack-piece.ganache{background:linear-gradient(135deg,#58301f,#24120d)}.stack-piece.red{background:linear-gradient(135deg,#b94b48,#682b30)}.stack-piece.strawberry{background:linear-gradient(135deg,#f6b2a8,#c85c62)}.stack-piece.cookie{background:linear-gradient(135deg,#b9a9a1,#51443f)}
+.layer-foot{text-align:center;color:#bca996;font:11px Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;margin-top:24px}
+.flavours{padding:100px 8vw;background:#eadbc7}.flavours h2{text-align:center;font-size:clamp(38px,5vw,62px);margin:0 0 45px}.flavour-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.flavour-tile{background:#f9f2e8;border-radius:12px;overflow:hidden;text-align:center;padding-bottom:20px}.flavour-tile img{width:100%;height:240px;object-fit:contain;padding:16px;background:#e5d2bb}.flavour-tile h3{font-size:21px;margin:17px 8px 5px}.flavour-tile p{font:11px Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0}
+footer{padding:55px 8vw;background:#211713;color:#f8eee2;display:flex;justify-content:space-between;align-items:center;gap:20px}footer strong{font:800 24px Arial,sans-serif;letter-spacing:.2em}footer span{font:11px Arial,sans-serif;letter-spacing:.15em;color:#cbb9a6}
+@media(max-width:800px){.hero{grid-template-columns:1fr;padding-top:130px;text-align:center}.hero p{margin:auto}.hero-art{min-height:380px}.hero-art img{max-height:360px}.explorer{grid-template-columns:1fr}.product-side{position:relative;top:auto;min-height:480px}.product-side img{max-height:330px}.flavour-grid{grid-template-columns:repeat(2,1fr)}header{padding:16px 5vw}.nav a{margin-left:12px;font-size:10px}}
+@media(max-width:480px){.nav a:first-child{display:none}.flavour-grid{grid-template-columns:1fr 1fr}.flavour-tile img{height:170px}.layer-card{grid-template-columns:58px 1fr;padding:13px;gap:12px}.layer-number{width:52px;height:52px}.layer-card h3{font-size:18px}}
+</style>
+</head>
+<body>
+<header><div class="logo">MZ</div><nav class="nav"><a href="#layers">The layers</a><a href="#flavours">Flavours</a></nav></header>
+<section class="hero">
+ <div><div class="eyebrow">A little cake. A big experience.</div><h1>Good things<br>come in <em>layers.</em></h1><p>Meet your favourite cake, reimagined in a can. Open it up, dig in, and discover a little moment of joy in every layer.</p><a class="cta" href="#layers">Explore the layers</a></div>
+ <div class="hero-art"><img src="assets/chocolate-can.png" alt="Chocolate cake in a can"></div>
+</section>
+<section class="intro"><div class="eyebrow">Not just cake. A whole experience.</div><h2>There's more beneath the top.</h2><p>Every spoonful brings together soft cake, luscious cream and flavour-packed layers. Scroll through each flavour to see exactly what's inside.</p></section>
+<section class="layer-section" id="layers">
+ <div class="layers-head"><div class="eyebrow">The inside story</div><h2>Layer by delicious layer.</h2><p>Choose a flavour. Watch the layers build. See what each one brings to the bite.</p></div>
+ <div class="explorer">
+  <div class="product-side"><img id="productImage" src="assets/chocolate-can.png" alt="Chocolate cake in a can"><div class="flavour-name" id="flavourName">Chocolate</div><div class="flavour-note">Made to be enjoyed, one layer at a time</div></div>
+  <div class="steps-side">
+   <div class="flavour-tabs" role="group" aria-label="Choose cake flavour">
+    <button class="active" data-flavour="chocolate">Chocolate</button><button data-flavour="red">Red Velvet</button><button data-flavour="strawberry">Strawberry</button><button data-flavour="cookies">Cookies &amp; Cream</button>
+   </div>
+   <div class="stack-visual" id="stackVisual" aria-hidden="true"></div>
+   <p class="steps-intro">As you scroll, each part of the cake is revealed and explained. Here's the order from the bottom of the can to the finishing touch.</p>
+   <div class="layer-list" id="layerList"></div>
+   <div class="layer-foot">The perfect bite is all in the layers</div>
+  </div>
+ </div>
+</section>
+<section class="flavours" id="flavours"><div class="eyebrow" style="text-align:center">Find your favourite</div><h2>Four ways to fall in love.</h2>
+ <div class="flavour-grid">
+  <article class="flavour-tile"><img src="assets/chocolate-can.png" alt="Chocolate cake can"><h3>Chocolate</h3><p>Rich · Deep · Decadent</p></article>
+  <article class="flavour-tile"><img src="assets/red-velvet-can.png" alt="Red velvet cake can"><h3>Red Velvet</h3><p>Soft · Creamy · Classic</p></article>
+  <article class="flavour-tile"><img src="assets/strawberry-can.png" alt="Strawberry cake can"><h3>Strawberry</h3><p>Fruity · Sweet · Lovely</p></article>
+  <article class="flavour-tile"><img src="assets/cookies-cream-cake.png" alt="Cookies and cream cake slice"><h3>Cookies &amp; Cream</h3><p>Cookie-filled · Creamy · Fun</p></article>
+ </div>
+</section>
+<footer><strong>MZ</strong><span>A LITTLE CAKE. A BIG EXPERIENCE.</span></footer>
+<script>
+const flavours={
+ chocolate:{name:"Chocolate",image:"assets/chocolate-can.png",layers:[
+ ["Chocolate sponge","A soft, rich chocolate cake base to start the stack.",""],
+ ["Chocolate cream","A smooth, creamy layer that adds a mellow chocolate finish.","cream"],
+ ["Chocolate ganache","A deep, silky chocolate layer for an extra-rich bite.","ganache"],
+ ["Chocolate sponge","Another layer of tender chocolate cake for the perfect balance.",""],
+ ["Chocolate layer","A final generous chocolate layer that brings it all together.","ganache"],
+ ["Chocolate shavings","A sprinkle of chocolate shavings to finish the top.","cookie"]]},
+ red:{name:"Red Velvet",image:"assets/red-velvet-can.png",layers:[
+ ["Cake","A soft, tender cake layer that forms the base.","red"],
+ ["Cream","A smooth, light cream layer paired with the cake.","cream"],
+ ["Cake","Another soft cake layer to build the classic red velvet stack.","red"],
+ ["Red velvet cream","A flavourful red velvet cream layer for the signature finish.","rose"],
+ ["Cake","A final layer of tender cake to complete the stack.","red"],
+ ["Toppings","The finishing toppings that make every bite feel special.","cookie"]]},
+ strawberry:{name:"Strawberry",image:"assets/strawberry-can.png",layers:[
+ ["Cake","A soft cake base for the fruity layers above.",""],
+ ["Cream","A smooth cream layer that balances the sweetness.","cream"],
+ ["Cake","Another tender cake layer for a lovely layered bite.",""],
+ ["Strawberry cream","A sweet strawberry-flavoured cream layer bursting with fruity character.","strawberry"],
+ ["Cake","A final soft cake layer to bring the stack together.",""],
+ ["Toppings","A finishing touch of toppings for a little extra joy.","strawberry"]]},
+ cookies:{name:"Cookies & Cream",image:"assets/cookies-cream-cake.png",layers:[
+ ["Cake","A soft cake base dotted with cookie pieces.",""],
+ ["Cream","A smooth cream layer to balance the cookie crunch.","cream"],
+ ["Cake","Another tender cake layer with cookie goodness in every bite.",""],
+ ["Cookies & cream layer","A creamy cookies-and-cream layer packed with familiar cookie flavour.","cookie"],
+ ["Cake","A final layer of soft cake to complete the stack.",""],
+ ["Cookie toppings","Crushed cookie pieces on top for the perfect finish.","cookie"]]}
+};
+let active="chocolate";
+const list=document.getElementById("layerList"), image=document.getElementById("productImage"), name=document.getElementById("flavourName"), stack=document.getElementById("stackVisual");
+function render(key){
+ active=key;const f=flavours[key];name.textContent=f.name;image.classList.add("switching");
+ setTimeout(()=>{image.src=f.image;image.alt=f.name+" cake";image.classList.remove("switching")},180);
+ document.querySelectorAll(".flavour-tabs button").forEach(b=>b.classList.toggle("active",b.dataset.flavour===key));
+ list.innerHTML="";stack.innerHTML="";
+ f.layers.forEach((layer,i)=>{
+  const card=document.createElement("article");card.className="layer-card";
+  card.innerHTML=`<div class="layer-number">${String(i+1).padStart(2,"0")}</div><div><h3>${layer[0]}</h3><p>${layer[1]}</p></div>`;
+  list.appendChild(card);
+  const piece=document.createElement("div");piece.className="stack-piece "+layer[2];stack.appendChild(piece);
+ });
+ observeCards();
+}
+let observer;
+function observeCards(){
+ if(observer)observer.disconnect();
+ const cards=[...document.querySelectorAll(".layer-card")];
+ observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+  if(entry.isIntersecting){entry.target.classList.add("visible");const idx=cards.indexOf(entry.target);const pieces=[...stack.children];pieces.forEach((p,i)=>p.classList.toggle("on",i<=idx));}
+ }),{threshold:.35});
+ cards.forEach(c=>observer.observe(c));
+}
+document.querySelectorAll(".flavour-tabs button").forEach(b=>b.addEventListener("click",()=>render(b.dataset.flavour)));
+render("chocolate");
+</script>
+</body></html>
